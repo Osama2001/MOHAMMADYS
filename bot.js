@@ -3,9 +3,11 @@ const ytdl = require("ytdl-core");
 const { Client, Util } = require('discord.js');
 const getYoutubeID = require('get-youtube-id');
 const fetchVideoInfo = require('youtube-info');
+const developers = ["459397282169618462", "398930588007923712"]
 const YouTube = require('simple-youtube-api');
 const youtube = new YouTube("AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8");
 const queue = new Map();
+const adminprefix = "$";
 const client = new Discord.Client();
 
 /*
@@ -264,6 +266,44 @@ ${prefix}queue ⇏ لمعرفة قآئمة التشغيل
    
    
    
-   
+   client.on('message', message => {
+    var argresult = message.content.split(` `).slice(1).join(' ');
+      if (!developers.includes(message.author.id)) return;
+      
+  if (message.content.startsWith(adminprefix + 'setplaying')) {
+    client.user.setGame(argresult);
+      message.channel.send(`Done You Have Been Changed The Playing To ${argresult}**✅ `)
+  } else 
+     if (message.content === (adminprefix + "dkbotleave")) {
+    message.guild.leave();        
+  } else  
+  if (message.content.startsWith(adminprefix + 'setwatching')) {
+  client.user.setActivity(argresult, {type:'WATCHING'});
+      message.channel.send(`Done You Have Been Changed The Watching To **${argresult}**✅`)
+  } else 
+  if (message.content.startsWith(adminprefix + 'setlistening')) {
+  client.user.setActivity(argresult , {type:'LISTENING'});
+      message.channel.send(`Done You Have Been Changed The Listening To  **${argresult}**✅`)
+  } else 
+  if (message.content.startsWith(adminprefix + 'setstreaming')) {
+    client.user.setGame(argresult, "https://www.twitch.tv/idk");
+      message.channel.send(`Done You Have Been Changed The Streaming To **${argresult}**✅`)
+  }
+  if (message.content.startsWith(adminprefix + 'setname')) {
+  client.user.setUsername(argresult).then
+      message.channel.send(`Changing The Name To ..**${argresult}** ✅`)
+} else
+if (message.content.startsWith(adminprefix + 'setavatar')) {
+  client.user.setAvatar(argresult);
+    message.channel.send(`Changing The Avatar To :**${argresult}** ✅`);
+}
+
+
+});
+
+
+
+
+
    
 client.login(process.env.BOT_TOKEN);
